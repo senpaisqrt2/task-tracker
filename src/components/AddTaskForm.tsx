@@ -23,7 +23,9 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Введите задачу..."
       />
-      <button type="submit">Добавить</button>
+      <button type="submit">
+          Добавить
+      </button>
     </form>
   );
 };
