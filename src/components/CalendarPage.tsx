@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Task } from '../App';
+import { Task, TaskStatus } from '../App';
 
 type CalendarPageProps = {
   tasks: Task[];
@@ -12,6 +12,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const CalendarPage: React.FC<CalendarPageProps> = ({ tasks }) => {
   const [date, setDate] = useState<Value>(new Date());
+  const [statusFilter, setStatusFilter] = useState<'all' | TaskStatus>('all');
 
   const tasksWithDeadlines = tasks.filter(task => task.deadline);
   
@@ -56,6 +57,17 @@ export const CalendarPage: React.FC<CalendarPageProps> = ({ tasks }) => {
           }}
         />
         <div className="tasks-list">
+          <div className="calendar-filters">
+            <select 
+              value={statusFilter} 
+              onChange={(e) => setStatusFilter(e.target.value as 'all' | TaskStatus)}
+            >
+              <option value="all">Все задачи</option>
+              <option value="todo">To-Do</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
           <h2>Задачи на {
             date ? 
             (Array.isArray(date) ? 
@@ -63,19 +75,22 @@ export const CalendarPage: React.FC<CalendarPageProps> = ({ tasks }) => {
               date.toLocaleDateString('ru-RU')) 
             : ''
           }</h2>
-          {tasksForDate.length > 0 ? (
+          {tasksForDate.filter(task => statusFilter === 'all' || task.status === statusFilter).length > 0 ? (
             <ul>
-              {tasksForDate.map(task => (
-                <li key={task.id} className={`task-item ${task.status}`}>
-                  <span className="task-text">{task.text}</span>
-                  <span className="task-time">
-                    {task.deadline?.toLocaleTimeString('ru-RU', {
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </span>
-                </li>
-              ))}
+              {tasksForDate
+                .filter(task => statusFilter === 'all' || task.status === statusFilter)
+                .map(task => (
+                  <li key={task.id} className={`task-item ${task.status}`}>
+                    <span className="task-text">{task.text}</span>
+                    <span className="task-time">
+                      {task.deadline?.toLocaleTimeString('ru-RU', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                      {task.status === 'done' ? ' ✅' : ''}
+                    </span>
+                  </li>
+                ))}
             </ul>
           ) : (
             <p>Нет задач с дедлайном на эту дату</p>

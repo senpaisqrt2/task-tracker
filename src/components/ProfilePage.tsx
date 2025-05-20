@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User } from '../App'; // Добавляем импорт типа
+import { User } from '../App';
 
 type ProfilePageProps = {
   user: User;
@@ -60,12 +60,20 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user, onUpdateUser }) 
               <p>Google календарь: {user.googleCalEmail}</p>
             </div>
           </div>
-          <button 
-            className="edit-btn"
-            onClick={() => setIsEditing(true)}
-          >
-            Редактировать профиль
-          </button>
+          <div className="profile-actions">
+            <button 
+              className="edit-btn"
+              onClick={() => setIsEditing(true)}
+            >
+              Редактировать профиль
+            </button>
+            <button 
+              className="sync-btn"
+              onClick={() => alert('Синхронизация с Google Calendar')}
+            >
+              Синхронизировать с Google Calendar
+            </button>
+          </div>
         </div>
       ) : (
         <div className="profile-edit">
@@ -107,6 +115,17 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user, onUpdateUser }) 
               name="email"
               value={editedUser.email}
               onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Google Calendar Email</label>
+            <input
+              type="email"
+              name="googleCalEmail"
+              value={editedUser.googleCalEmail}
+              onChange={handleInputChange}
+              placeholder="Введите email Google Calendar"
             />
           </div>
           

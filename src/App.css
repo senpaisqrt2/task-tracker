@@ -625,6 +625,36 @@ h1 {
   100% { box-shadow: 0 0 0 0 rgba(247, 37, 133, 0); }
 }
 
+.sync-btn {
+  padding: 0.75rem 1.5rem;
+  background: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sync-btn:hover {
+  background: #3367D6;
+}
+
+.calendar-filters {
+  margin-bottom: 1rem;
+}
+
+.calendar-filters select {
+  padding: 0.5rem;
+  background: var(--card-dark);
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+}
+
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {

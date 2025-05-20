@@ -9,7 +9,6 @@ type TaskProps = {
   nextStatus?: Task['status'];
 };
 
-
 export const TaskItem: React.FC<TaskProps> = ({ 
   task, 
   onMoveTask, 
@@ -29,6 +28,7 @@ export const TaskItem: React.FC<TaskProps> = ({
     });
   };
 
+  // Функция для определения срочности задачи
   const getTaskUrgencyClass = (deadline?: Date): string => {
     if (!deadline) return '';
     
@@ -42,7 +42,7 @@ export const TaskItem: React.FC<TaskProps> = ({
   };
 
   return (
-    <div className="task">
+    <div className={`task ${getTaskUrgencyClass(task.deadline)}`}>
       <p>{task.text}</p>
       {task.deadline && (
         <p className="deadline">
@@ -65,5 +65,4 @@ export const TaskItem: React.FC<TaskProps> = ({
       </div>
     </div>
   );
-
 };
