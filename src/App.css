@@ -173,6 +173,242 @@ h1 {
   background-color: #d3166b; /* Темнее красный */
 }
 
+/* Навигация */
+.app-navigation {
+  background: var(--card-dark);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-navigation ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.app-navigation a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.app-navigation a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.board-switcher select {
+  padding: 0.5rem;
+  background: var(--card-dark);
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+}
+
+/* Страница профиля */
+.profile-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-info {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  background: var(--card-dark);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* Страница досок */
+.other-boards {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.create-board {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.create-board input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  background: var(--card-dark);
+  color: var(--text-light);
+}
+
+.create-board button {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.boards-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.board-card {
+  background: var(--card-dark);
+  padding: 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.board-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Стили профиля */
+.profile-view {
+  background: var(--card-dark);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.profile-edit {
+  background: var(--card-dark);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-edit {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  overflow: hidden;
+}
+
+.avatar-upload {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-dark);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.avatar-upload:hover {
+  background: var(--primary);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.edit-btn, .save-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover, .save-btn:hover {
+  background: var(--primary);
+}
+
+.cancel-btn {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
   .board {
