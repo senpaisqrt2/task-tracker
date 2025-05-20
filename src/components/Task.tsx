@@ -1,16 +1,15 @@
 import React from 'react';
 import { Task } from '../App';
 
-// Пропсы для компонента задачи
 type TaskProps = {
-  task: Task;  // Объект задачи
-  onMoveTask: (taskId: number, newStatus: Task['status']) => void;  // Функция перемещения
-  onDeleteTask: (taskId: number) => void;  // Функция удаления
-  prevStatus?: Task['status'];  // Предыдущий статус
-  nextStatus?: Task['status'];  // Следующий статус
+  task: Task;
+  onMoveTask: (taskId: number, newStatus: Task['status']) => void;
+  onDeleteTask: (taskId: number) => void;
+  prevStatus?: Task['status'];
+  nextStatus?: Task['status'];
 };
 
-// Компонент отдельной задачи
+
 export const TaskItem: React.FC<TaskProps> = ({ 
   task, 
   onMoveTask, 
@@ -18,31 +17,53 @@ export const TaskItem: React.FC<TaskProps> = ({
   prevStatus,
   nextStatus
 }) => {
+  // Функция для форматирования даты
+  const formatDeadline = (date?: Date) => {
+    if (!date) return null;
+    return date.toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const getTaskUrgencyClass = (deadline?: Date): string => {
+    if (!deadline) return '';
+    
+    const now = new Date();
+    const timeDiff = deadline.getTime() - now.getTime();
+    const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+    
+    if (daysDiff < 1) return 'task-urgent';
+    if (daysDiff < 3) return 'task-due-soon';
+    return '';
+  };
+
   return (
     <div className="task">
-      {/* Текст задачи */}
       <p>{task.text}</p>
-      
-      {/* Контейнер для кнопок действий */}
+      {task.deadline && (
+        <p className="deadline">
+          ⏰ Дедлайн: {formatDeadline(task.deadline)}
+        </p>
+      )}
       <div className="task-actions">
-        {/* Кнопка "назад" (отображается если есть prevStatus) */}
         {prevStatus && (
           <button onClick={() => onMoveTask(task.id, prevStatus)}>← Назад</button>
         )}
-        
-        {/* Кнопка удаления */}
         <button 
           className="delete-btn" 
           onClick={() => onDeleteTask(task.id)}
         >
           ×
         </button>
-        
-        {/* Кнопка "вперёд" (отображается если есть nextStatus) */}
         {nextStatus && (
           <button onClick={() => onMoveTask(task.id, nextStatus)}>Вперёд →</button>
         )}
       </div>
     </div>
   );
+
 };

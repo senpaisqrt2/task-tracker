@@ -57,6 +57,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user, onUpdateUser }) 
               <h2>{user.name}</h2>
               <p>Email: {user.email}</p>
               <p>Дата регистрации: {user.registrationDate}</p>
+              <p>Google календарь: {user.googleCalEmail}</p>
             </div>
           </div>
           <button 

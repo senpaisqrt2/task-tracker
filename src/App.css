@@ -409,6 +409,223 @@ h1 {
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Стили для календаря */
+.calendar-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.calendar-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.react-calendar {
+  width: 600px;
+  max-width: 100%;
+  background: var(--card-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.deadline-marker {
+  height: 5px;
+  width: 5px;
+  background-color: var(--danger);
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  bottom: 5px;
+  left: calc(50% - 2.5px);
+}
+
+.tasks-list {
+  flex: 1;
+  background: var(--card-dark);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.tasks-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tasks-list li {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.task-status {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: var(--primary-dark);
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* Стили для дедлайна в карточке задачи */
+.deadline {
+  font-size: 0.8rem;
+  color: #f72585;
+  margin: 0.5rem 0;
+}
+
+/* Добавляем в конец файла */
+.deadline {
+  font-size: 0.85rem;
+  color: #f72585;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.deadline::before {
+  content: '';
+  font-size: 1rem;
+}
+
+.task {
+  position: relative;
+}
+
+.task-urgent {
+  border-left-color: #f72585;
+}
+
+.task-due-soon {
+  border-left-color: #f8a53a;
+}
+
+/* Добавляем в раздел формы */
+.add-task {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deadline-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deadline-input label {
+  white-space: nowrap;
+}
+
+.deadline-input input {
+  padding: 0.5rem;
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+  background: var(--card-dark);
+  color: var(--text-light);
+  flex-grow: 1;
+}
+
+/* Календарь */
+.calendar-page {
+  padding: 2rem;
+}
+
+.calendar-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.react-calendar {
+  width: 400px;
+  max-width: 100%;
+  background: var(--card-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-light);
+}
+
+.react-calendar__tile--now {
+  background: var(--primary-dark);
+}
+
+.react-calendar__tile--active {
+  background: var(--primary);
+}
+
+.deadline-marker {
+  height: 6px;
+  width: 6px;
+  background-color: #f72585;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  bottom: 5px;
+  left: calc(50% - 3px);
+}
+
+.tasks-list {
+  flex: 1;
+  background: var(--card-dark);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.tasks-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item.todo {
+  border-left: 3px solid #4cc9f0;
+}
+
+.task-item.in-progress {
+  border-left: 3px solid #4361ee;
+}
+
+.task-item.done {
+  border-left: 3px solid #4caf50;
+}
+
+.task-time {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Добавим в раздел задач */
+.task-urgent {
+  border-left: 3px solid var(--danger);
+  animation: pulse 2s infinite;
+}
+
+.task-due-soon {
+  border-left: 3px solid #f8a53a;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(247, 37, 133, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(247, 37, 133, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(247, 37, 133, 0); }
+}
+
+
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
   .board {

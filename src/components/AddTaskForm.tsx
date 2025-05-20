@@ -1,38 +1,42 @@
 import React, { useState } from 'react';
 
-// Пропсы для компонента формы добавления задачи
 type AddTaskFormProps = {
-  onAddTask: (text: string) => void;  // Функция для добавления задачи
+  onAddTask: (text: string, deadline?: Date) => void;
 };
 
-// Компонент формы добавления задачи
 export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
-  // Состояние для текста задачи
   const [text, setText] = useState('');
+  const [deadline, setDeadline] = useState('');
 
-  // Обработчик отправки формы
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();  // Предотвращаем стандартное поведение формы
-    if (text.trim()) {   // Проверяем, что текст не пустой
-      onAddTask(text);   // Вызываем функцию добавления
-      setText('');       // Очищаем поле ввода
+    e.preventDefault();
+    if (text.trim()) {
+      const deadlineDate = deadline ? new Date(deadline) : undefined;
+      onAddTask(text, deadlineDate);
+      setText('');
+      setDeadline('');
     }
   };
 
   return (
-    // Форма с обработчиком onSubmit
     <form className="add-task" onSubmit={handleSubmit}>
-      {/* Поле ввода текста задачи */}
       <input
         type="text"
         value={text}
-        onChange={(e) => setText(e.target.value)}  // Обновляем состояние при изменении
+        onChange={(e) => setText(e.target.value)}
         placeholder="Введите задачу..."
+        required
       />
-      {/* Кнопка отправки формы */}
-      <button type="submit">
-          Добавить
-      </button>
+      <div className="deadline-input">
+        <label htmlFor="deadline">Дедлайн:</label>
+        <input
+          type="datetime-local"
+          id="deadline"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+        />
+      </div>
+      <button type="submit">Добавить</button>
     </form>
   );
 };

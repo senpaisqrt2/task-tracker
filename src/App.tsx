@@ -5,6 +5,7 @@ import { Column } from './components/Column';
 import { AddTaskForm } from './components/AddTaskForm';
 import { ProfilePage } from './components/ProfilePage';
 import { OtherBoardsPage } from './components/OtherBoardsPage';
+import { CalendarPage } from './components/CalendarPage';
 
 export type TaskStatus = 'todo' | 'in-progress' | 'done';
 
@@ -12,6 +13,7 @@ export type Task = {
   id: number;
   text: string;
   status: TaskStatus;
+  deadline?: Date;
 };
 
 export type Board = {
@@ -27,6 +29,7 @@ export type User = {
   email: string;
   avatar: string;
   registrationDate: string;
+  googleCalEmail: string;
 };
 
 function App() {
@@ -54,10 +57,11 @@ function App() {
   // Добавляем состояние пользователя
   const [user, setUser] = useState<User>({
     id: 'user-1',
-    name: 'Иван Иванов',
-    email: 'ivan@example.com',
+    name: 'Senti',
+    email: 'Senti@honkaiimpact3rd.yatta',
     avatar: '',
-    registrationDate: '01.01.2023',
+    registrationDate: '11.09.2001',
+    googleCalEmail: 'HoS@google.com'
   });
 
   const currentBoard = boards[currentBoardId];
@@ -84,11 +88,12 @@ function App() {
     });
   };
 
-  const addTask = (text: string) => {
+  const addTask = (text: string, deadline?: Date) => {
     const newTask: Task = {
       id: Date.now(),
       text,
       status: "todo",
+      deadline
     };
     setBoards({
       ...boards,
@@ -97,6 +102,10 @@ function App() {
         tasks: [...currentBoard.tasks, newTask],
       },
     });
+  };
+
+  const getAllTasks = (boards: Record<string, Board>): Task[] => {
+    return Object.values(boards).flatMap(board => board.tasks);
   };
 
   const createNewBoard = (name: string) => {
@@ -120,6 +129,7 @@ function App() {
             <li><Link to="/">Главная</Link></li>
             <li><Link to="/profile">Профиль</Link></li>
             <li><Link to="/boards">Другие доски</Link></li>
+            <li><Link to="/calendar">Календарь</Link></li>
           </ul>
           
           <div className="board-switcher">
@@ -182,6 +192,12 @@ function App() {
               boards={boards} 
               onCreateBoard={createNewBoard}
               onSelectBoard={setCurrentBoardId}
+            />
+          } />
+
+          <Route path="/calendar" element={
+            <CalendarPage
+              tasks={getAllTasks(boards)}
             />
           } />
           
